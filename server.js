@@ -29,9 +29,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.render('maintenance', {pageTitle: 'Maintenance'});
-});
+const inMaintenance = false;
+if (inMaintenance) {
+  app.use((req, res, next) => {
+    res.render('maintenance', {pageTitle: 'Maintenance'});
+  });
+}
 
 app.get('/', (req, res) => {
   // res.send('<h1>Hello S Expresser</h1>');
@@ -46,6 +49,12 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Fabout us!'
+  });
+});
+
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
   });
 });
 
